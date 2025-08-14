@@ -18,7 +18,7 @@ TARGET_CHANNELS =  [
 
 
 def get_today_messages():
-    """Bugünkü mesajları seçilen kanallardan alır"""
+    
     url = "https://slack.com/api/conversations.list"
     headers = {"Authorization": f"Bearer {SLACK_TOKEN}"}
     channels = requests.get(url, headers=headers).json().get("channels", [])
@@ -28,7 +28,7 @@ def get_today_messages():
 
     for ch in channels:
         if TARGET_CHANNELS and ch["name"] not in TARGET_CHANNELS:
-            continue  # Listede olmayan kanalı atla
+            continue 
 
         ch_id = ch["id"]
         hist_url = "https://slack.com/api/conversations.history"
