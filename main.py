@@ -1,17 +1,7 @@
-
-ALLOWED_CHANNELS = [
-    "social-media-team",
-    "brainy-team",
-    "marketing-team",
-    "software-team",
-    "aylik-rapor",
-    "link-grubu" 
-]
 import os
 import requests
 from datetime import datetime, timezone
 
-# --- AYARLAR ---
 SLACK_TOKEN = os.getenv("SLACK_BOT_TOKEN")  
 CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY") 
 SUMMARY_CHANNEL = "#gunluk-ozet"  
