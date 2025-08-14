@@ -21,7 +21,7 @@ def get_today_messages():
     channels = requests.get(url, headers=headers).json()["channels"]
 
     all_messages = []
-    start_ts = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
+    start_ts = (datetime.now(timezone.utc) - timedelta(hours=1)).timestamp()
 
     for ch in channels:
         if ch["name"] not in ALLOWED_CHANNELS:
