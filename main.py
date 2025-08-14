@@ -84,7 +84,17 @@ if __name__ == "__main__":
         post_to_slack(summary)
     else:
         post_to_slack("Bugün hiç mesaj bulunamadı.")
-    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
