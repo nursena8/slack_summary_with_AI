@@ -21,4 +21,5 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          TEST_WINDOW_HOURS: "1"   # ← sadece testte ekle (son 1 saat)
         run: python main.py
