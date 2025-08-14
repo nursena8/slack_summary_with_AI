@@ -92,43 +92,7 @@ if __name__ == "__main__":
         summary = summarize_with_claude(messages)
         post_to_slack(summary)
     else:
-        post_to_slack("Bugün hiç mesaj bulunamadı 📭")
-
-     
-def summarize_with_claude(text):
-    url = "https://api.anthropic.com/v1/messages"
-    headers = {
-        "x-api-key": CLAUDE_API_KEY,
-        "content-type": "application/json",
-        "anthropic-version": "2023-06-01"
-    }
-    payload = {
-        "model": "claude-3-opus-20240229",
-        "max_tokens": 1000,
-        "messages": [
-            {
-                "role": "user",
-                "content": f"Bugünkü Slack mesajlarını analiz et, detaylı ve kategorilere ayrılmış bir özet çıkar, emoji ekle:\n\n{text}"
-            }
-        ]
-    }
-    resp = requests.post(url, headers=headers, json=payload).json()
-    return resp["content"][0]["text"]
-
-def post_to_slack(message):
-    url = "https://slack.com/api/chat.postMessage"
-    headers = {"Authorization": f"Bearer {SLACK_TOKEN}", "Content-Type": "application/json"}
-    payload = {"channel": SUMMARY_CHANNEL, "text": message}
-    requests.post(url, headers=headers, json=payload)
-
-if __name__ == "__main__":
-    messages = get_today_messages()
-    if messages.strip():
-        summary = summarize_with_claude(messages)
-        post_to_slack(summary)
-    else:
-        post_to_slack("Bugün hiç mesaj bulunamadı.")
-
+        post_to_slack("Bugün hiç mesaj bulunamadı ")
 
 
 
