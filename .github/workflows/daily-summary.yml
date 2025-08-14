@@ -2,24 +2,31 @@ name: Daily Slack Summary
 
 on:
   schedule:
-    - cron: "0 17 * * *"  # 20:00 Türkiye saati (UTC+3)
-  workflow_dispatch:
+    - cron: "0 17 * * *"
+  workflow_dispatch: {}  
+
+concurrency:
+  group: daily-slack-summary
+  cancel-in-progress: true
 
 jobs:
   run-summary:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install requests
+
+      - name: Install dependencies
         run: pip install requests
-      - name: Run script
+
+      - name: Run daily summary
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
-          TEST_WINDOW_HOURS: "1"   # ← sadece testte ekle (son 1 saat)
-        run: python main.py
+          CLAUDE_API_KEY:  ${{ secrets.CLAUDE_API_KEY }}
+        run: python slack_summary.py
