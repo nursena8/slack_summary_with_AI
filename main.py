@@ -1,10 +1,19 @@
 import os
 import requests
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 SLACK_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")
 SUMMARY_CHANNEL = "#gunluk-ozet"
+
+ALLOWED_CHANNELS = [
+    "social-media-team",
+    "brainy-team",
+    "marketing-team",
+    "software-team",
+    "aylik-rapor",
+    "link-grubu" 
+]
 
 def get_today_messages():
     url = "https://slack.com/api/conversations.list"
@@ -15,10 +24,14 @@ def get_today_messages():
     start_ts = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
 
     for ch in channels:
+        if ch["name"] not in ALLOWED_CHANNELS:
+            continue  # listedeki kanallardan değilse atla
+
         ch_id = ch["id"]
         hist_url = "https://slack.com/api/conversations.history"
         params = {"channel": ch_id, "oldest": start_ts}
         resp = requests.get(hist_url, headers=headers, params=params).json()
+
         for msg in resp.get("messages", []):
             text = msg.get("text", "")
             user = msg.get("user", "")
@@ -58,5 +71,14 @@ if __name__ == "__main__":
         summary = summarize_with_claude(messages)
         post_to_slack(summary)
     else:
-        post_to_slack("Bugün hiç mesaj bulunamadı ")
+        post_to_slack("Bugün hiç mesaj bulunamadı.")
+
+
+
+
+
+
+
+
+
 
