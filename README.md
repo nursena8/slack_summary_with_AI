@@ -51,7 +51,7 @@ pip install requests
   
       -  ```groups:history``` → Read message history in private channels  
 
-      -  ```chat:write``` → Read message history in private channels
+      -  ```chat:write``` → Send messages 
   - **OAuth & Permissions** → **Install App to Workspace**
   -This will generate your **Bot User OAuth Token** (starts with `xoxb-...`). Save this token as `SLACK_BOT_TOKEN`.  
   - Invite bot to channel  ``` /invite @your-bot-name```
