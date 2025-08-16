@@ -63,7 +63,7 @@ export SLACK_BOT_TOKEN="xoxb-xxxxxx"
 export CLAUDE_API_KEY="sk-ant-xxxxxx"
 ```
 -  Run ```python main.py```
--  You also can create scheduling to be able to post whenever you want.
+-  You canalso  create scheduling to be able to post whenever you want.
 
 
 
